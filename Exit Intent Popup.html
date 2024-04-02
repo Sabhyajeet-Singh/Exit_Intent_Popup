@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exit Intent Popup</title>
+    <style>
+        .exit-intent-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .exit-intent-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .exit-intent-close-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #close {
+            font-weight: bold;
+            position: relative;
+            left: 100Px;
+            bottom: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="exitIntentPopup" class="exit-intent-popup">
+        <div class="exit-intent-content">
+            <span id="close">X</span>
+            <h2>Don't Leave!</h2>
+            <p>We have a special offer for you.</p>
+            <button id="OfferBtn" class="exit-intent-close-btn">Offer</button>
+            <button id="exitIntentCloseBtn" class="exit-intent-close-btn">Exit</button>
+        </div>
+    </div>
+
+    <script>
+       document.addEventListener("mouseleave", function(event) {
+            if (event.clientY <= 0) {
+                displayExitIntentPopup();
+            }
+        });
+
+        document.getElementById("close").addEventListener("click", function() {
+            hideExitIntentPopup();
+        });
+
+        document.getElementById("OfferBtn").addEventListener("click", function() {
+            hideExitIntentPopup();
+            window.location.href = "https://eazydiner.com";
+        });
+
+        document.getElementById("exitIntentCloseBtn").addEventListener("click", function() {
+            window.close();
+        });
+
+        window.onpopstate = function(event) {
+            displayExitIntentPopup();
+        };
+
+        function displayExitIntentPopup() {
+            document.getElementById("exitIntentPopup").style.display = "block";
+        }
+
+        function hideExitIntentPopup() {
+            document.getElementById("exitIntentPopup").style.display = "none";
+        }
+    </script>
+</body>
+</html>
